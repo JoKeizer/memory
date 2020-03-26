@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import Board from './components/board'
 
-function App() {
+import initializeDeck from './deck'
+
+export default function App() {
+    const [cards, setCards] = useState([]);
+    const [flipped, setFlipped] = useState([]);
+    const [dimension, setDimension] = useState(400);
+
+
+    const handleClick = (id) => {
+        setFlipped([...flipped, id])
+    };
+
+    useEffect(() => {
+        resizeBoard()
+        setCards(initializeDeck())
+    },[]);
+
+    useEffect(() => {
+        const resizeListener = window.addEventListener('resize', resizeBoard);
+
+        return () => window.removeEventListener('resize', resizeListener)
+    }, []);
+
+
+    const resizeBoard = () => {
+        setDimension(Math.min(
+            document.documentElement.clientWidth,
+            document.documentElement.clientHeight,
+        ))
+    }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Memory</h1>
+        <Board dimension={dimension}
+            cards={cards}
+            flipped={flipped}
+            handleClick={handleClick}
+        />
     </div>
   );
 }
 
-export default App;
