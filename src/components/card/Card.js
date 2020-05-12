@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './Card.css';
 
 export default function Card({
     handleClick,
@@ -10,21 +10,33 @@ export default function Card({
     height,
     width,
     disabled,
-     solved
+    solved,
+    number
 }) {
+
+
     return <div
         className={`flip-container ${flipped ? 'flipped': ''}`}
         style={{width, height}}
         onClick={ () => disabled ? null : handleClick(id) }
-
-    >
+        >
         <div className="flipper">
             <img
-                style={{
-                    height, width}}
+                style={{height, width}}
                 className={flipped ? 'front' : 'back'}
-                src={flipped || solved ? `/img/${type}.jpg` : `/img/back.jpg`}
+                src={flipped || solved ? `/img/${type}.png` : `/img/back/back.png`}
             />
+            {/*{flipped || solved ? null : <span className="number">{number}</span>}*/}
+            {flipped || solved ? null :
+                <Fragment>
+                    {number > 9 ? <span className="high-number">{number}</span> : <span className="number">{number}</span>}
+                </Fragment>
+            }
+
+
+
+
+
         </div>
     </div>
 }

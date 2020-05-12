@@ -1,0 +1,12 @@
+.points{
+    font-family: var(--primaryFontBold);
+    text-align: center;
+}
+.time-box {
+    background: var(--primaryColor);
+    height: 10px;
+    width: 100%;
+    margin: 0 auto;
+    margin: 1px;
+}
+

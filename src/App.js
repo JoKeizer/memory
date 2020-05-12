@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import './App.css';
-import Board from './components/board'
+import Board from './components/board/Board'
+import Header from './components/header/Header';
+import Score from './components/score/Score';
 
 import initializeDeck from './deck'
 
@@ -53,11 +55,11 @@ export default function App() {
 
     const preloadImages = () => {
         cards.map(card => {
-            const src = `/img/${card.type}.jpg`
+            const src = `/img/${card.type}.png`
             new Image().src = src
 
         })
-    }
+    };
 
     //Check if the card have the same id
     const sameCardClicked = (id) => flipped.includes(id);
@@ -67,9 +69,7 @@ export default function App() {
         const flippedCard = cards.find((card) => flipped[0] === card.id)
         return flippedCard.type === clickedCard.type
 
-    }
-
-
+    };
 
 
     const resizeBoard = () => {
@@ -77,20 +77,31 @@ export default function App() {
             document.documentElement.clientWidth,
             document.documentElement.clientHeight,
         ))
-    }
+    };
 
   return (
-    <div className="App">
-      <h1>Memory</h1>
-        <Board dimension={dimension}
-            key={cards.id}
-            cards={cards}
-            flipped={flipped}
-            handleClick={handleClick}
-           disabled={disabled}
-           solved={solved}
-        />
-    </div>
+    <Fragment>
+        <div className="container">
+            <Header title="Memory"/>
+
+            <div className="game-container">
+                <Board dimension={dimension}
+                       key={cards.id}
+                       cards={cards}
+                       flipped={flipped}
+                       handleClick={handleClick}
+                       disabled={disabled}
+                       solved={solved}
+                />
+                <Score totalPoints={350}/>
+
+            </div>
+            </div>
+
+
+
+
+    </Fragment>
   );
 }
 

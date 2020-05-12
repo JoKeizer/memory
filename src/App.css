@@ -1,38 +1,182 @@
-.App {
-  text-align: center;
+
+@font-face {
+  font-family: 'Janda-Manatee-Solid';
+  src: url('./fonts/JandaManateeSolid.woff2') format('woff2'),
+  url('./fonts/JandaManateeSolid.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: 'Feeling-Good';
+  src: url('./fonts/FeelingGood.woff2') format('woff2'),
+  url('./fonts/FeelingGood.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'SF-Pro-Text';
+  src: url('./fonts/SFProText-Regular.woff2') format('woff2'),
+  url('./fonts/SFProText-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@font-face {
+  font-family: 'SF-Pro-Text-Semibild';
+  src: url('./fonts/SFProText-Semibold.woff2') format('woff2'),
+  url('./fonts/SFProText-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Baby-Balloon';
+  src: url('./fonts/BabyBalloon.woff2') format('woff2'),
+  url('./fonts/BabyBalloon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Baby-Balloon-Group';
+  src: url('./fonts/BabyBalloonGroup.woff2') format('woff2'),
+  url('./fonts/BabyBalloonGroup.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FuturaCondensedPT-ExtraBold';
+  src: url('./fonts/FuturaCondensedPT-ExtraBold.woff2') format('woff2'),
+  url('./fonts/FuturaCondensedPT-ExtraBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+
+/*Default Quiz*/
+:root {
+
+  --primaryFont: 'SF-Pro-Text';
+  --primaryFontBold: 'SF-Pro-Text-Semibild';
+  --secondaryFont: 'Janda-Manatee-Solid';
+  --titleFont: 'Feeling-Good';
+  --subTitleFont: 'Baby-Balloon';
+  --subTitleFontBold: 'Baby-Balloon-Group';
+  --primaryColor: #084174;
+  --secondaryColor: #fc8f0a;
+  --correct: #01ff13;
+  --black: #000000;
+  --white: #ffffff;
+  --lightGrey: #bfbfbf;
+  --maxWidthContainer: 600px;
+  --maxWidthContainerWeb: 1000px;
+  --maxWidthContainerMobile: 300px;
+
+}
+
+html {
+  font-size: 17px;
+}
+
+@media (max-width: 900px) {
+  html { font-size: 15px; }
+}
+@media (max-width: 400px) {
+  html { font-size: 13px; }
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+p {
+  font-family: var(--primaryFont);
+  font-size: 1.2em;
+  color: var(--black)
+}
+
+.container {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.game-container {
+  background-color: var(--white);
+  height: 100%;
+  padding: 0 20px 20px 20px;
+  box-shadow: 10px 10px 60px -27px rgba(23,23,23,0.25);
+  border-radius: 30px;
+  width: var(--maxWidthContainerWeb);
+  margin: auto;
+}
+
+.btn {
+  background: var(--primaryColor);
+  width: 50%;
+  height: 30px;
+  font-family: var(--primaryFontBold);
+  font-size: 1.1rem;
+  padding-left: 12px;
+  display: flex;
+  color: var(--white);
+  border-radius: 30px;
+  text-align: center;
+  margin: auto;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.btn:hover {
+  color: var(--secondaryColor)
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+
+@media (max-width: 900px) {
+  .game-container {
+    width: 800px;
   }
 }
+
+
+@media (max-width: 800px) {
+  .game-container {
+    width: 700px;
+  }
+}
+
+@media (max-width: 700px) {
+  .game-container {
+    width: 600px;
+  }
+}
+
+@media (max-width: 500px) {
+  .game-container {
+    width: 400px;
+
+  }
+}
+
+@media (max-width: 400px) {
+  .game-container {
+    width: 300px;
+
+  }
+}
+

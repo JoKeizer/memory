@@ -1,0 +1,104 @@
+.flip-container {
+    perspective: 1000px;
+    display: inline-block;
+    border: 1px solid white;
+    background-color: white;
+}
+
+.flip-container.flipped .flipper {
+    transform: rotateY(180deg);
+}
+
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.front,
+.back {
+    backface-visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.back {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+img.back {
+    position: relative;
+}
+
+.front {
+    transform: rotateY(0deg);
+}
+
+.number {
+    position: absolute;
+    top: 18%;
+    left: 32%;
+    color: white;
+    z-index: 4;
+    font-family: 'FuturaCondensedPT-ExtraBold';
+    font-size: 100px;
+}
+
+.high-number {
+    position: absolute;
+    top: 12%;
+    left: 16%;
+    color: white;
+    z-index: 4;
+    font-family: 'FuturaCondensedPT-ExtraBold';
+    font-size: 100px;
+}
+
+
+@media (max-width: 900px) {
+    .number {
+        font-size: 90px;
+    }
+    .high-number {
+        font-size: 90px;
+    }
+}
+
+
+@media (max-width: 800px) {
+    .number {
+        font-size: 80px;
+    }
+    .high-number {
+        font-size: 80px;
+    }
+}
+
+@media (max-width: 700px) {
+    .number {
+        font-size: 70px;
+    }
+    .high-number {
+        font-size: 70px;
+    }
+}
+
+@media (max-width: 500px) {
+    .number {
+        font-size: 50px;
+    }
+    .high-number {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 400px) {
+    .number {
+        font-size: 40px;
+    }
+    .high-number {
+        font-size: 40px;
+    }
+}

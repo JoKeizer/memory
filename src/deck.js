@@ -14,8 +14,8 @@ function shuffle(array) {
 }
 
 export default function initializeDeck() {
-    let id = 0
-    const cards = ['react', 'python', 'redux', 'vue', 'angular', 'javascript', 'ruby', 'rails'].reduce((acc, type) => {
+    let id = 0;
+    const cards = ['ado-den-haag', 'ajax', 'az', 'fc-emmen', 'fc-groningen', 'fc-twente', 'fc-utrecht', 'feyenoord', 'fortuna-sittard', 'heracles', 'pec-zwolle', 'psv', 'rkc', 'sc-heerenveen', 'sparta', 'vitesse', 'vvv-venlo', 'willem-2'].reduce((acc, type) => {
         acc.push({
             id: id++,
             type
