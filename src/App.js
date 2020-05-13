@@ -3,6 +3,7 @@ import './App.css';
 import Board from './components/board/Board'
 import Header from './components/header/Header';
 import Score from './components/score/Score';
+import Timer from './components/timer/Timer';
 
 import initializeDeck from './deck'
 
@@ -11,6 +12,7 @@ export default function App() {
     const [flipped, setFlipped] = useState([]);
     const [dimension, setDimension] = useState(400);
     const [solved, setSolved] = useState([]);
+    const [scoreCount, setScore] = useState(0);
     //can't click the board more than two
     const [disabled, setDisabled] = useState(false);
 
@@ -26,7 +28,6 @@ export default function App() {
 
     useEffect(() => {
         const resizeListener = window.addEventListener('resize', resizeBoard);
-
         return () => window.removeEventListener('resize', resizeListener)
     }, []);
 
@@ -36,11 +37,12 @@ export default function App() {
             setFlipped([id]);
             setDisabled(false);
         } else {
-            if(sameCardClicked(id)) return
-            setFlipped([flipped[0], id])
+            if(sameCardClicked(id)) return;
+            setFlipped([flipped[0], id]);
 
             if(isMatch(id)) {
                 setSolved([...solved, flipped[0], id])
+                setScore(scoreCount + 20)
                 resetCards()
             } else {
                 setTimeout(resetCards, 2000)
@@ -83,8 +85,8 @@ export default function App() {
     <Fragment>
         <div className="container">
             <Header title="Memory"/>
-
             <div className="game-container">
+                <Timer seconds={190} />
                 <Board dimension={dimension}
                        key={cards.id}
                        cards={cards}
@@ -93,7 +95,7 @@ export default function App() {
                        disabled={disabled}
                        solved={solved}
                 />
-                <Score totalPoints={350}/>
+                <Score totalPoints={scoreCount}/>
 
             </div>
             </div>

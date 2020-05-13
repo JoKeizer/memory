@@ -55,6 +55,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Digital-7Mono';
+  src: url('./fonts/Digital-7Mono.woff2') format('woff2'),
+  url('./fonts/Digital-7Mono.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 
 
