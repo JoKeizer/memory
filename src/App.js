@@ -15,7 +15,10 @@ export default function App() {
     const [scoreCount, setScore] = useState(0);
     //can't click the board more than two
     const [disabled, setDisabled] = useState(false);
-
+    //End Game
+    const [finished, setFinished] = useState(false);
+    const totalCards = cards.length / 2;
+    const [totalMatches, setTotalMatch] = useState(totalCards)
 
     useEffect(() => {
         resizeBoard();
@@ -31,6 +34,16 @@ export default function App() {
         return () => window.removeEventListener('resize', resizeListener)
     }, []);
 
+
+    const resetGame= () => {
+        console.log("resetGame running")
+        setFinished(false);
+        setScore(0);
+        setCards(initializeDeck());
+        preloadImages()
+
+    }
+
     const handleClick = (id) => {
         setDisabled(true);
         if(flipped.length === 0) {
@@ -42,7 +55,7 @@ export default function App() {
 
             if(isMatch(id)) {
                 setSolved([...solved, flipped[0], id])
-                setScore(scoreCount + 20)
+                setScore(scoreCount + 20);
                 resetCards()
             } else {
                 setTimeout(resetCards, 2000)
@@ -59,7 +72,6 @@ export default function App() {
         cards.map(card => {
             const src = `/img/${card.type}.png`
             new Image().src = src
-
         })
     };
 
@@ -67,9 +79,14 @@ export default function App() {
     const sameCardClicked = (id) => flipped.includes(id);
 
     const isMatch = (id) => {
-        const clickedCard = cards.find((card) => card.id === id)
-        const flippedCard = cards.find((card) => flipped[0] === card.id)
-        return flippedCard.type === clickedCard.type
+        const clickedCard = cards.find((card) => card.id === id);
+        const flippedCard = cards.find((card) => flipped[0] === card.id);
+
+        if(solved.length === totalCards) {
+            finishedGame();
+        }
+
+        return flippedCard.type === clickedCard.type;
 
     };
 
@@ -81,27 +98,39 @@ export default function App() {
         ))
     };
 
+    const finishedGame = () => {
+        setFinished(true);
+    }
+
   return (
     <Fragment>
-        <div className="container">
-            <Header title="Memory"/>
-            <div className="game-container">
-                <Timer seconds={190} />
-                <Board dimension={dimension}
-                       key={cards.id}
-                       cards={cards}
-                       flipped={flipped}
-                       handleClick={handleClick}
-                       disabled={disabled}
-                       solved={solved}
-                />
-                <Score totalPoints={scoreCount}/>
+        {finished ? (<Fragment>
+            <div className="container">
+                <Header title="Results"/>
+                <div className="game-container">
+                    <p className="total-score">Total score: {scoreCount}</p>
+                    <button className="btn" onClick={() => resetGame()} >Play again</button>
 
+                </div>
             </div>
+        </Fragment>) : (<Fragment>
+            <div className="container">
+                <Header title="Memory"/>
+                <div className="game-container">
+                    <Timer seconds={190} endGame={finished} />
+                    <Board dimension={dimension}
+                           key={cards.id}
+                           cards={cards}
+                           flipped={flipped}
+                           handleClick={handleClick}
+                           disabled={disabled}
+                           solved={solved}
+                    />
+                    <Score totalPoints={scoreCount}/>
+
+                </div>
             </div>
-
-
-
+        </Fragment>)}
 
     </Fragment>
   );
